@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+google-generativeai>=0.8.6
+python-dotenv
+sqlalchemy
+pillow
+python-multipart
+gunicorn

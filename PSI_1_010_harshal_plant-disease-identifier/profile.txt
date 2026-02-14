@@ -1,0 +1,48 @@
+
+
+Name              : P
+                    i
+                    x
+                    e
+                    l
+                     
+                    7
+                     
+                    1
+                    4
+InterfaceAlias    : W
+                    i
+                    -
+                    F
+                    i
+InterfaceIndex    : 1
+                    6
+NetworkCategory   : P
+                    u
+                    b
+                    l
+                    i
+                    c
+DomainAuthenticat : N
+                    o
+                    n
+                    e
+IPv4Connectivity  : I
+                    n
+                    t
+                    e
+                    r
+                    n
+                    e
+                    t
+IPv6Connectivity  : I
+                    n
+                    t
+                    e
+                    r
+                    n
+                    e
+                    t
+
+
+
