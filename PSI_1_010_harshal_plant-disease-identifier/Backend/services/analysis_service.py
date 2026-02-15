@@ -17,10 +17,26 @@ def analyze_plant(image_path):
     if not client:
         return "Gemini API client not configured."
         
-    with open(image_path, "rb") as img:
-        response = client.models.generate_content(
-            model="gemini-2.0-flash",
-            contents=["Analyze plant disease and give treatment", img]
-        )
+    try:
+        with open(image_path, "rb") as img:
+            prompt = """
+            Analyze this plant image:
+            - Disease detection
+            - Pest detection
+            - Health issues
+            - Treatment suggestions
+            """
+            
+            response = client.models.generate_content(
+                model="gemini-2.0-flash",
+                contents=[prompt, img]
+            )
 
-    return response.text
+        if response and response.text:
+            return response.text
+        return "Gemini returned an empty response."
+
+    except Exception as e:
+        error_msg = str(e)
+        print(f"❌ Gemini Analysis Error: {error_msg}")
+        return f"Analysis failed: {error_msg}"

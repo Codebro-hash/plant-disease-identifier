@@ -3,6 +3,6 @@ uvicorn
 google-genai
 python-dotenv
 sqlalchemy
-pillow
+pillow>=10.0.0
 python-multipart
 gunicorn

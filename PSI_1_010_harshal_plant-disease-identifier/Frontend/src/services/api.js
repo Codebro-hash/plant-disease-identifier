@@ -3,15 +3,22 @@ export const fetchPlants = async (token) => {
     const headers = token ? { Authorization: token } : {};
     const res = await fetch("/api/plants", { headers });
 
-    // If backend stopped → fetch fails
+    // If backend stopped or returns non-JSON (like 502/504)
     if (!res.ok) {
+      const errorText = await res.text().catch(() => "Unknown error");
+      console.error("Backend error:", errorText);
       throw new Error("Backend error");
     }
 
-    return await res.json();
+    try {
+      return await res.json();
+    } catch (e) {
+      console.error("JSON parse error:", e);
+      throw new Error("Invalid response from server");
+    }
   } catch (error) {
     console.error("Fetch plants error:", error);
-    throw error; // VERY IMPORTANT
+    throw error;
   }
 };
 export const deletePlant = async (id, token) => {

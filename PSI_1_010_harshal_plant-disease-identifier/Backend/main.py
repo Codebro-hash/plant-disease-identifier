@@ -45,7 +45,7 @@ def compress_image(image_path, max_size=(800, 800), quality=85):
     if img.mode in ("RGBA", "P"):
         img = img.convert("RGB")
     
-    img.thumbnail(max_size, Image.Resampling.LANCZOR)
+    img.thumbnail(max_size, Image.Resampling.LANCZOS)
     
     # Save to a byte buffer to check size
     buffer = io.BytesIO()
@@ -117,49 +117,13 @@ async def upload_image(
 
         # 2. Gemini analysis (if not cached)
         if genai_configured:
-            import time
-            analysis = None
-            max_retries = 3
-
-            for attempt in range(max_retries):
-                try:
-                    # Compress image before sending to API
-                    print(f"📸 Compressing image for attempt {attempt + 1}")
-                    compressed_img = compress_image(file_path)
-
-                    prompt = """
-                    Analyze this plant image:
-                    - Disease detection
-                    - Pest detection
-                    - Health issues
-                    - Treatment suggestions
-                    """
-
-                    response = client.models.generate_content(
-                        model="gemini-2.0-flash",
-                        contents=[prompt, compressed_img],
-                    )
-
-                    analysis = response.text
-                    print(f"✅ Analysis succeeded on attempt {attempt + 1}")
-                    break
-
-                except Exception as e:
-                    error_str = str(e)
-                    print(f"❌ Gemini API Error (attempt {attempt + 1}/{max_retries}): {error_str}")
-
-                    if "429" in error_str or "RESOURCE_EXHAUSTED" in error_str:
-                        if attempt < max_retries - 1:
-                            wait_time = (attempt + 1) * 10
-                            print(f"⏳ Rate limited. Waiting {wait_time}s before retry...")
-                            time.sleep(wait_time)
-                            continue
-                    
-                    analysis = f"Demo Mode: API Error ({error_str})."
-                    break
-
-            if analysis is None:
-                analysis = "Analysis failed after multiple retries. This may be due to API quota limits."
+            from services.analysis_service import analyze_plant
+            # Compress image before sending to API
+            print(f"📸 Compressing image for analysis")
+            compress_image(file_path)
+            
+            # Use centralized analysis service
+            analysis = analyze_plant(file_path)
         else:
             analysis = "Gemini API not configured."
 
