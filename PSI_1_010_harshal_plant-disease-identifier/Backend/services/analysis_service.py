@@ -1,5 +1,5 @@
 import os
-import google.generativeai as genai
+from google import genai
 from dotenv import load_dotenv
 
 # Load API key from .env file
@@ -11,7 +11,7 @@ if api_key:
 else:
     print("⚠ GOOGLE_API_KEY not found in .env")
 
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-2.5-flash")
 
 def analyze_plant(image_path):
     """Analyze a plant image for disease detection using Gemini."""
