@@ -136,7 +136,11 @@ async def upload_image(
                     """
 
                     response = client.models.generate_content(
+<<<<<<< HEAD
+                        model="gemini-2.5-flash",
+=======
                         model="gemini-2.0-flash",
+>>>>>>> main
                         contents=[prompt, compressed_img],
                     )
 
