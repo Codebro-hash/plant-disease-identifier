@@ -1,10 +1,6 @@
 fastapi
 uvicorn
-<<<<<<< HEAD
 google-genai
-=======
-google-generativeai>=0.8.6
->>>>>>> main
 python-dotenv
 sqlalchemy
 pillow
