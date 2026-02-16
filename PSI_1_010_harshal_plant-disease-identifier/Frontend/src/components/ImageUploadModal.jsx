@@ -72,6 +72,11 @@ export default function ImageUploadModal({ onClose }) {
         throw new Error(data.detail || "Upload failed");
       }
 
+      // Ensure image URL is absolute for display
+      if (data.image && !data.image.startsWith('http')) {
+        data.image = `${API_BASE_URL}${data.image}`;
+      }
+
       toast.update(toastId, {
         render: "Analysis complete! 🌱",
         type: "success",

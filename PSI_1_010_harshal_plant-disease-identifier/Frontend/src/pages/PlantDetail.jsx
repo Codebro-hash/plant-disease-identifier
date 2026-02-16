@@ -29,7 +29,12 @@ export default function PlantDetail() {
         return res.json();
       })
       .then((data) => {
-        setPlant(data);
+        // Ensure image URL is absolute
+        const processedData = {
+          ...data,
+          image: data.image.startsWith('http') ? data.image : `${API_BASE_URL}${data.image}`
+        };
+        setPlant(processedData);
         setLoading(false);
       })
       .catch(() => {
@@ -45,9 +50,15 @@ export default function PlantDetail() {
         method: "DELETE",
         headers: { Authorization: user.uid }
       });
+      const data = await res.json();
 
       if (!res.ok) {
-        throw new Error("Delete failed");
+        throw new Error(data.detail || "Upload failed");
+      }
+
+      // If needed, transform the image URL in the response
+      if (data.image && !data.image.startsWith('http')) {
+        data.image = `${API_BASE_URL}${data.image}`;
       }
 
       toast.success("Plant deleted successfully");

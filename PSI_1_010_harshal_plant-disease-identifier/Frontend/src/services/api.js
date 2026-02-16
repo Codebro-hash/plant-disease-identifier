@@ -13,7 +13,12 @@ export const fetchPlants = async (token) => {
     }
 
     try {
-      return await res.json();
+      const data = await res.json();
+      // Ensure image URLs are absolute
+      return data.map(plant => ({
+        ...plant,
+        image: plant.image.startsWith('http') ? plant.image : `${API_BASE_URL}${plant.image}`
+      }));
     } catch (e) {
       console.error("JSON parse error:", e);
       throw new Error("Invalid response from server");
