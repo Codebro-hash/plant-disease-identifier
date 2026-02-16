@@ -6,6 +6,7 @@ import Modal from "../components/Modal";
 import { toast } from "react-toastify";
 import { FileText, Trash2, ArrowLeft, Download, AlertTriangle } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
+import { API_BASE_URL } from "../services/api";
 
 export default function PlantDetail() {
   const { id } = useParams();
@@ -20,7 +21,7 @@ export default function PlantDetail() {
   useEffect(() => {
     if (!user) return;
 
-    fetch(`/api/plants/${id}`, {
+    fetch(`${API_BASE_URL}/plants/${id}`, {
       headers: { Authorization: user.uid }
     })
       .then((res) => {
@@ -40,7 +41,7 @@ export default function PlantDetail() {
   // DELETE FUNCTION
   const handleDelete = async () => {
     try {
-      const res = await fetch(`/api/plants/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/plants/${id}`, {
         method: "DELETE",
         headers: { Authorization: user.uid }
       });
@@ -63,7 +64,7 @@ export default function PlantDetail() {
       const toastId = toast.loading("Preparing download...");
 
       const res = await fetch(
-        `/api/plants/${id}/export`,
+        `${API_BASE_URL}/plants/${id}/export`,
         {
           headers: {
             Authorization: user.uid,

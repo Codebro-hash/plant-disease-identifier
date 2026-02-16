@@ -1,6 +1,8 @@
 import { useState } from "react";
 
-const API_URL = "/api/random-quote";
+import { API_BASE_URL } from "../services/api";
+
+const API_URL = `${API_BASE_URL}/random-quote`;
 
 function QuoteGenerator() {
   const [quote, setQuote] = useState("");

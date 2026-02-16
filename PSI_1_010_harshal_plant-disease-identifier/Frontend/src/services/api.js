@@ -1,7 +1,9 @@
+export const API_BASE_URL = import.meta.env.VITE_API_URL || "https://plant-disease-identifier-3bxa.onrender.com";
+
 export const fetchPlants = async (token) => {
   try {
     const headers = token ? { Authorization: token } : {};
-    const res = await fetch("/api/plants", { headers });
+    const res = await fetch(`${API_BASE_URL}/plants`, { headers });
 
     // If backend stopped or returns non-JSON (like 502/504)
     if (!res.ok) {
@@ -22,7 +24,7 @@ export const fetchPlants = async (token) => {
   }
 };
 export const deletePlant = async (id, token) => {
-  const res = await fetch(`/api/plants/${id}`, {
+  const res = await fetch(`${API_BASE_URL}/plants/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: token,

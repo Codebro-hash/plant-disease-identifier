@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { toast } from "react-toastify";
 import { UploadCloud, X, FileText, AlertCircle, Loader2 } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
+import { API_BASE_URL } from "../services/api";
 
 export default function ImageUploadModal({ onClose }) {
   const { user } = useContext(AuthContext);
@@ -57,7 +58,7 @@ export default function ImageUploadModal({ onClose }) {
     const toastId = toast.loading("Analyzing plant health...");
 
     try {
-      const res = await fetch("/api/upload", {
+      const res = await fetch(`${API_BASE_URL}/upload`, {
         method: "POST",
         headers: {
           Authorization: user.uid,
