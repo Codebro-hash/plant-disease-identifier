@@ -1,15 +1,16 @@
-// In production on Vercel, prefer calling same-origin `/api/*` and proxying to Render via `vercel.json`.
-// In local dev, you can set `VITE_BACKEND_URL` to call Render/localhost directly.
+// Always prefer an explicit backend URL so we don't depend on Vercel rewrites.
+// On Vercel, set VITE_BACKEND_URL to your Render URL, e.g.:
+// VITE_BACKEND_URL=https://plant-disease-identifier-3bxa.onrender.com
 export const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL ||
   import.meta.env.VITE_BACKEND_URL ||
-  "/api";
+  import.meta.env.VITE_API_BASE_URL ||
+  "https://plant-disease-identifier-3bxa.onrender.com";
 
 // Assets (uploaded images) may live at the backend origin (`https://...onrender.com/uploads/...`)
 // or may be proxied through Vercel at same-origin (`/uploads/...`) or served from Cloudinary (absolute).
 export const ASSET_BASE_URL =
   import.meta.env.VITE_ASSET_BASE_URL ||
-  (API_BASE_URL.startsWith("http") ? API_BASE_URL : "");
+  (API_BASE_URL.startsWith("http") ? API_BASE_URL : "https://plant-disease-identifier-3bxa.onrender.com");
 
 export function resolveImageUrl(image) {
   if (!image) return image;
