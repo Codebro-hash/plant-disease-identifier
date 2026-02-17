@@ -1,4 +1,4 @@
-export const API_BASE_URL = import.meta.env.VITE_API_URL || "https://plant-disease-identifier-3bxa.onrender.com";
+export const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "https://plant-disease-identifier-3bxa.onrender.com";
 
 export const fetchPlants = async (token) => {
   try {
