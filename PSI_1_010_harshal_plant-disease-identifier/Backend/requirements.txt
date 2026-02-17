@@ -6,3 +6,4 @@ sqlalchemy
 pillow>=10.0.0
 python-multipart
 gunicorn
+cloudinary

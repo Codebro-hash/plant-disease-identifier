@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { toast } from "react-toastify";
 import { UploadCloud, X, FileText, AlertCircle, Loader2 } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
-import { API_BASE_URL } from "../services/api";
+import { API_BASE_URL, resolveImageUrl } from "../services/api";
 
 export default function ImageUploadModal({ onClose }) {
   const { user } = useContext(AuthContext);
@@ -73,9 +73,7 @@ export default function ImageUploadModal({ onClose }) {
       }
 
       // Ensure image URL is absolute for display
-      if (data.image && !data.image.startsWith('http')) {
-        data.image = `${API_BASE_URL}${data.image}`;
-      }
+      if (data.image) data.image = resolveImageUrl(data.image);
 
       toast.update(toastId, {
         render: "Analysis complete! 🌱",

@@ -6,7 +6,7 @@ import Modal from "../components/Modal";
 import { toast } from "react-toastify";
 import { FileText, Trash2, ArrowLeft, Download, AlertTriangle } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
-import { API_BASE_URL } from "../services/api";
+import { API_BASE_URL, resolveImageUrl } from "../services/api";
 
 export default function PlantDetail() {
   const { id } = useParams();
@@ -32,7 +32,7 @@ export default function PlantDetail() {
         // Ensure image URL is absolute
         const processedData = {
           ...data,
-          image: data.image.startsWith('http') ? data.image : `${API_BASE_URL}${data.image}`
+          image: resolveImageUrl(data.image),
         };
         setPlant(processedData);
         setLoading(false);
@@ -57,9 +57,7 @@ export default function PlantDetail() {
       }
 
       // If needed, transform the image URL in the response
-      if (data.image && !data.image.startsWith('http')) {
-        data.image = `${API_BASE_URL}${data.image}`;
-      }
+      if (data.image) data.image = resolveImageUrl(data.image);
 
       toast.success("Plant deleted successfully");
       navigate("/dashboard");
