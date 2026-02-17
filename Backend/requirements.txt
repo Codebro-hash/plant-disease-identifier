@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+google-genai
+python-dotenv
+sqlalchemy
+pillow>=10.0.0
+python-multipart
+gunicorn
+cloudinary
