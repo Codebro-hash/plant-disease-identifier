@@ -1,0 +1,73 @@
+
+Windows IP Configuration
+
+   Host Name . . . . . . . . . . . . : Harshal
+   Primary Dns Suffix  . . . . . . . : 
+   Node Type . . . . . . . . . . . . : Hybrid
+   IP Routing Enabled. . . . . . . . : No
+   WINS Proxy Enabled. . . . . . . . : No
+
+Ethernet adapter Ethernet 3:
+
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : VirtualBox Host-Only Ethernet Adapter
+   Physical Address. . . . . . . . . : 0A-00-27-00-00-04
+   DHCP Enabled. . . . . . . . . . . : No
+   Autoconfiguration Enabled . . . . : Yes
+   Link-local IPv6 Address . . . . . : fe80::d7be:6cc2:2c47:d60e%4(Preferred) 
+   IPv4 Address. . . . . . . . . . . : 192.168.56.1(Preferred) 
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Default Gateway . . . . . . . . . : 
+   DHCPv6 IAID . . . . . . . . . . . : 889847847
+   DHCPv6 Client DUID. . . . . . . . : 00-01-00-01-2D-20-A6-08-2C-58-B9-33-15-40
+   NetBIOS over Tcpip. . . . . . . . : Enabled
+
+Wireless LAN adapter Local Area Connection* 1:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : Microsoft Wi-Fi Direct Virtual Adapter
+   Physical Address. . . . . . . . . : AA-41-F4-24-A9-21
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Autoconfiguration Enabled . . . . : Yes
+
+Wireless LAN adapter Local Area Connection* 2:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : Microsoft Wi-Fi Direct Virtual Adapter #2
+   Physical Address. . . . . . . . . : AA-41-F4-24-A9-31
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Autoconfiguration Enabled . . . . : Yes
+
+Wireless LAN adapter Wi-Fi:
+
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : MediaTek MT7921 Wi-Fi 6 802.11ax PCIe Adapter
+   Physical Address. . . . . . . . . : A8-41-F4-24-A9-51
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Autoconfiguration Enabled . . . . : Yes
+   IPv6 Address. . . . . . . . . . . : 2401:4900:79de:be72:ee0d:3cc8:788a:3b68(Preferred) 
+   Temporary IPv6 Address. . . . . . : 2401:4900:79de:be72:e178:7d62:64a0:fb55(Preferred) 
+   Link-local IPv6 Address . . . . . : fe80::f294:131:7689:7430%16(Preferred) 
+   IPv4 Address. . . . . . . . . . . : 10.211.93.251(Preferred) 
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Lease Obtained. . . . . . . . . . : 13 February 2026 09:58:18
+   Lease Expires . . . . . . . . . . : 13 February 2026 11:58:36
+   Default Gateway . . . . . . . . . : fe80::a45a:50ff:fedc:c1cf%16
+                                       10.211.93.50
+   DHCP Server . . . . . . . . . . . : 10.211.93.50
+   DHCPv6 IAID . . . . . . . . . . . : 145244660
+   DHCPv6 Client DUID. . . . . . . . : 00-01-00-01-2D-20-A6-08-2C-58-B9-33-15-40
+   DNS Servers . . . . . . . . . . . : 10.211.93.50
+                                       2401:4900:79de:be72::a3
+   NetBIOS over Tcpip. . . . . . . . : Enabled
+
+Ethernet adapter Ethernet:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : Realtek Gaming GbE Family Controller
+   Physical Address. . . . . . . . . : 2C-58-B9-33-15-40
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Autoconfiguration Enabled . . . . : Yes

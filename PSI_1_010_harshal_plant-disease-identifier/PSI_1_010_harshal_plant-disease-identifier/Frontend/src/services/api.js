@@ -1,38 +1,25 @@
-<<<<<<< HEAD
-// Always use backend URL from env variable first
-// Fallback to Render backend if env variable missing (safe default)
-
-export const API_BASE_URL =
-  import.meta.env.VITE_BACKEND_URL ||
-  "https://plant-disease-identifier-3bxa.onrender.com";
-
-// Asset URL handling
-export const ASSET_BASE_URL = API_BASE_URL;
-=======
 // Always prefer an explicit backend URL so we don't depend on Vercel rewrites.
-// On Vercel, set VITE_BACKEND_URL to your Render URL, e.g.:
-// VITE_BACKEND_URL=https://plant-disease-identifier-3bxa.onrender.com
+// In local dev, default to the local backend; in production, default to Render.
+const DEFAULT_LOCAL_BACKEND = "http://127.0.0.1:8000";
+const DEFAULT_RENDER_BACKEND = "https://plant-disease-identifier-3bxa.onrender.com";
+
 export const API_BASE_URL =
   import.meta.env.VITE_BACKEND_URL ||
   import.meta.env.VITE_API_BASE_URL ||
-  "https://plant-disease-identifier-3bxa.onrender.com";
+  (import.meta.env.DEV ? DEFAULT_LOCAL_BACKEND : DEFAULT_RENDER_BACKEND);
 
-// Assets (uploaded images) may live at the backend origin (`https://...onrender.com/uploads/...`)
-// or may be proxied through Vercel at same-origin (`/uploads/...`) or served from Cloudinary (absolute).
+// Asset URL handling
 export const ASSET_BASE_URL =
   import.meta.env.VITE_ASSET_BASE_URL ||
-  (API_BASE_URL.startsWith("http") ? API_BASE_URL : "https://plant-disease-identifier-3bxa.onrender.com");
->>>>>>> 8ef368c (Refactor analysis_service.py to enhance error handling and streamline API integration. Update analyze_plant function for better type usage with image data and improve console output. Adjust main.py for optimized cache checks and ensure proper file cleanup post-analysis.)
+  (API_BASE_URL.startsWith("http") ? API_BASE_URL : DEFAULT_RENDER_BACKEND);
 
 export function resolveImageUrl(image) {
   if (!image) return image;
   if (typeof image !== "string") return image;
 
-  if (image.startsWith("http://") || image.startsWith("https://"))
-    return image;
+  if (image.startsWith("http://") || image.startsWith("https://")) return image;
 
-  if (image.startsWith("/uploads/"))
-    return `${ASSET_BASE_URL}${image}`;
+  if (image.startsWith("/uploads/")) return `${ASSET_BASE_URL}${image}`;
 
   return image;
 }

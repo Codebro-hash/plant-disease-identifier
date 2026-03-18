@@ -121,13 +121,7 @@ export default function Dashboard() {
                 {searchQuery ? "No matching results" : "No Plants Analyzed Yet"}
               </h3>
               <p className="text-gray-400">
-
                 {searchQuery
-
-
-
-
-
                   ? `We couldn't find any results for "${searchQuery}"`
                   : "Upload your first plant photo to get started with disease detection."}
               </p>
