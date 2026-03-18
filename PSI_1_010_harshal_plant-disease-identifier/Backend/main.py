@@ -30,10 +30,10 @@ api_key = os.getenv("GOOGLE_API_KEY")
 if api_key:
     client = genai.Client(api_key=api_key)
     genai_configured = True
-    print("✅ Gemini API configured")
+    print("Gemini API configured")
 else:
     genai_configured = False
-    print("⚠ Gemini API key missing")
+    print("WARNING: Gemini API key missing")
 
 
 # =========================
@@ -186,6 +186,12 @@ async def upload_image(
 
         # Check cached result
         cached = db.query(Plant).filter(Plant.image_hash == image_hash).first()
+        cache_is_usable = bool(
+            cached
+            and cached.analysis
+            and not str(cached.analysis).startswith("Analysis failed:")
+            and "not configured" not in str(cached.analysis).lower()
+        )
 
         # Determine image URL/path to store
         image_to_store = None
@@ -200,14 +206,7 @@ async def upload_image(
         else:
             image_to_store = file_path
 
-        # If using Cloudinary, we don't need local file persistence on the server.
-        if CLOUDINARY_ENABLED and os.path.exists(file_path):
-            try:
-                os.remove(file_path)
-            except Exception:
-                pass
-
-        if cached:
+        if cache_is_usable:
             new_plant = Plant(
                 image_path=image_to_store,
                 analysis=cached.analysis,
@@ -234,6 +233,14 @@ async def upload_image(
             analysis = analyze_plant(file_path)
         else:
             analysis = "Gemini API not configured."
+
+        # If using Cloudinary, we don't need local file persistence on the server.
+        # Delete only AFTER analysis to avoid breaking local-file analysis.
+        if CLOUDINARY_ENABLED and os.path.exists(file_path):
+            try:
+                os.remove(file_path)
+            except Exception:
+                pass
 
         # Save new record
         plant = Plant(
