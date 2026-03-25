@@ -184,8 +184,13 @@ async def upload_image(
 
         db = SessionLocal()
 
-        # Check cached result
-        cached = db.query(Plant).filter(Plant.image_hash == image_hash).first()
+        # Check cached result (use most recent first so an earlier failure doesn't block later success)
+        cached = (
+            db.query(Plant)
+            .filter(Plant.image_hash == image_hash)
+            .order_by(Plant.id.desc())
+            .first()
+        )
         cache_is_usable = bool(
             cached
             and cached.analysis
@@ -217,6 +222,14 @@ async def upload_image(
             db.add(new_plant)
             db.commit()
             db.refresh(new_plant)
+
+            # If Cloudinary is enabled, free local storage even when we reuse cached analysis.
+            if CLOUDINARY_ENABLED and os.path.exists(file_path):
+                try:
+                    os.remove(file_path)
+                except Exception:
+                    pass
+
             db.close()
 
             return {
