@@ -30,10 +30,10 @@ api_key = os.getenv("GOOGLE_API_KEY")
 if api_key:
     client = genai.Client(api_key=api_key)
     genai_configured = True
-    print("✅ Gemini API configured")
+    print("Gemini API configured")
 else:
     genai_configured = False
-    print("⚠ Gemini API key missing")
+    print("WARNING: Gemini API key missing")
 
 
 # =========================

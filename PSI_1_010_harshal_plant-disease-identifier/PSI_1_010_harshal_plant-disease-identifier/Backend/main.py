@@ -200,13 +200,6 @@ async def upload_image(
         else:
             image_to_store = file_path
 
-        # If using Cloudinary, we don't need local file persistence on the server.
-        if CLOUDINARY_ENABLED and os.path.exists(file_path):
-            try:
-                os.remove(file_path)
-            except Exception:
-                pass
-
         if cached:
             new_plant = Plant(
                 image_path=image_to_store,
@@ -247,6 +240,13 @@ async def upload_image(
         db.commit()
         db.refresh(plant)
         db.close()
+
+        # If using Cloudinary, local temporary file is no longer needed.
+        if CLOUDINARY_ENABLED and os.path.exists(file_path):
+            try:
+                os.remove(file_path)
+            except Exception:
+                pass
 
         return {
             "success": True,
